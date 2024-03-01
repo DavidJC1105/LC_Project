@@ -44,5 +44,5 @@ while True:
         if numb == '2':
             ref.update({str(int(time.time())):{'study_time(minutes)':counter, 'Location':source, 'Wasted_Time(minutes)':waste}})
             break
-        else:
-            print("There has been an error")
+    else:
+        print("There has been an error")
