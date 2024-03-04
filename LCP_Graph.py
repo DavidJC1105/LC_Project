@@ -17,7 +17,7 @@ ref = db.reference()
 ref = db.reference().child('study_time')
 #source = input("Please input the study location: ")
 data = ref.order_by_child('Location').get()
-#print (data)
+#print (type(data))
 wasteminutes = []
 totaltime = []
 location = []
@@ -57,10 +57,10 @@ for key,value in data.items():
     #totaltime.append(value['study_time(minutes)'])
    
 #print(location)
-print(wasteminutes)
+#print(wasteminutes)
 dl =0
 times[dl:len(wasteminutes)] = []
-print(times)
+#print(times)
 #print(totaltime)
 lowest_value = wasteminutes[0]
 
@@ -69,19 +69,75 @@ for num in wasteminutes:
     if num < lowest_value:
         lowest_value = num
         
-print(lowest_value)       
+#print(lowest_value)       
 totalwaste = []
 for key, value in data.items():
     wastedtime = value.get('Wasted_Time(minutes)')
     if wastedtime is not None:
         totalwaste.append(wastedtime)
 
-print(totalwaste)       
-        
-        
-        
-        
-        
+#print(totalwaste)       
+totalminutes = []
+for key, value in data.items():
+    totaltimes = value.get('study_time(minutes)')
+    if totaltimes is not None:
+        totalminutes.append(totaltimes)     
+
+#print(totalminutes)
+
+
+def find_lowest_time_and_waste(totalwaste, times):
+    min_total_waste = min(totalwaste)  # Find the minimum total waste
+    lowest_times = []  # Initialize a list to store all times with the lowest total waste
+
+    # Iterate through the totalwaste list
+    for index, waste in enumerate(totalwaste):
+        if waste == min_total_waste:  # If the current total waste is equal to the minimum
+            lowest_times.append(times[index])  # Add the corresponding time to the list
+
+    # Return the list of times and the minimum total waste
+    return lowest_times, min_total_waste
+
+
+lowest_times, lowest_total_waste = find_lowest_time_and_waste(totalwaste, times)
+
+mintimes = []
+for timestamp in lowest_times:
+    timestamp_value = float(timestamp)  # Convert timestamp to float
+    study_time = data[timestamp]['study_time(minutes)']  # Fetch corresponding study time
+    #formatted_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(timestamp_value))  # Format timestamp
+    mintimes.append(study_time)
+    #print("At", timestamp, "the study time was", study_time, "minutes.")
+
+#print(type(lowest_times))
+#print("The time(s) with the lowest total waste is:", lowest_times)
+#print("The corresponding total waste is:", lowest_total_waste)
+ind = 0
+starttime = []
+for start in mintimes:
+    start = int(mintimes[ind])
+    starttime.append(start*60)
+    ind = ind+1
+    if ind == len(mintimes):
+        break
+#print (starttime)
+
+formatted_times = []  # Initialize a list to collect formatted times
+
+starting = 0
+for eachtime in lowest_times:
+    eachtime = int(eachtime) - starttime[starting]  # Assuming starttime is another list
+    formatted_time = datetime.fromtimestamp(eachtime).strftime('%H:%M:%S')
+    formatted_times.append(formatted_time)  # Collect formatted time in the list
+    starting += 1
+
+# Print the collected formatted times
+print("You started your best study sessions at these times:")
+for time in formatted_times:
+    print(time)
+
+
+
         
 
 import matplotlib.pyplot as plt
