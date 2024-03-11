@@ -10,12 +10,14 @@ counter = 0
 percent = 0
 percentage = 0
 
-cred = credentials.Certificate("C:/Users/David Cummins/Downloads/lc-project-457ba-firebase-adminsdk-fwptw-e035b686d3.json")
+cred = credentials.Certificate("C:/Users/David Cummins/Downloads/lc-project-457ba-firebase-adminsdk-fwptw-627c13a8de.json")
 firebase_admin.initialize_app(cred,{'databaseURL': 'https://lc-project-457ba-default-rtdb.europe-west1.firebasedatabase.app/'})
-ref = db.reference()
-#
+whatif = input('Enter 1 if you want to see your best sessions(What if #1) or enter 2 if you want to see your worst(What if #2). If you dont enter either of these you will be shown your best results: ')
+if whatif != '1' and whatif !='2':
+    whatif = 1
+whatif = int(whatif)
 #ref.update({'study_time':''})
-'''
+
 custom_timestamps = [
     #Monday
     {"timestamp": 175795840, "data": {"Location": "Room 1", "Wasted_Time(minutes)": 10, "study_time(minutes)": 65}},
@@ -37,16 +39,53 @@ custom_timestamps = [
     {"timestamp": 174945360, "data": {"Location": "Room 5", "Wasted_Time(minutes)": 21, "study_time(minutes)": 34}},
     #Sunday
     {"timestamp": 174949680, "data": {"Location": "Room 3", "Wasted_Time(minutes)": 5, "study_time(minutes)": 87}},
-    {"timestamp": 174954000, "data": {"Location": "Room 4", "Wasted_Time(minutes)": 10, "study_time(minutes)": 60}},
+    {"timestamp": 174954000, "data": {"Location": "Room 4", "Wasted_Time(minutes)": 21, "study_time(minutes)": 60}},
     # Add more custom timestamps and corresponding data as needed
 ]
-
+'''
 # Push data to Firebase
 for data_point in custom_timestamps:
     timestamp = data_point["timestamp"]
     data = data_point["data"]
     ref.child('study_time').child(str(timestamp)).update(data)
 '''
+
+ref = db.reference()
+
+# Check if the study_time node already exists in the Firebase database
+study_time_exists = ref.child('study_time').get() is not None
+
+# If the study_time node does not exist, add it to the Firebase database
+if not study_time_exists:
+    # Define the study_time node
+    study_time_ref = ref.child('study_time')
+
+    # Add the data to the database
+    study_time_ref.update({'': ''})  # Add an empty child to prevent overwriting
+    print("study_time node added to the Firebase database.")
+else:
+    print("study_time node already exists in the Firebase database, skipping adding it again.")
+
+# Check if the dataset already exists in the Firebase database
+dataset_exists = ref.child('study_time').get() is not None
+
+# If the dataset does not exist, add it to the Firebase database
+if not dataset_exists:
+    # Define the study_time node
+    study_time_ref = ref.child('study_time')
+
+    # Loop through custom_timestamps and update Firebase
+    for data_point in custom_timestamps:
+        timestamp = str(data_point["timestamp"])  # Convert timestamp to string
+        data = data_point["data"]
+
+        # Add the data to the database
+        study_time_ref.child(timestamp).set(data)
+        print(f"Data added for timestamp: {timestamp}")
+
+    print("Data update complete.")
+else:
+    print("Dataset already exists in the Firebase database, skipping adding it again.")
 
 #ref.update({'study_time':''})
 ref = db.reference().child('study_time')
@@ -57,7 +96,7 @@ totaltime = []
 location = []
 times = []
 count = 0
-
+'''
 for timestamp, session_data in data.items():
     timestamp = int(timestamp)
     formatted_timestamp = datetime.fromtimestamp(timestamp).strftime('%H:%M:%S %d-%m-%Y')
@@ -67,7 +106,7 @@ for timestamp, session_data in data.items():
         print(key, "is:", value)
     
     print("\n")
-
+'''
 
 for key,value in data.items():
     if value['Location'] not in location:
@@ -257,13 +296,25 @@ for eachtime in lowest_times:
     starting += 1
 
 formatted_times_max = []  # Initialize a list to collect formatted times
-
+'''
 starting_max = 0
 for eachtime in highest_times:
     eachtime = int(eachtime) - starttime_max[starting_max]  # Assuming starttime is another list
     formatted_time_max = datetime.fromtimestamp(eachtime).strftime('%H:%M:%S')
     formatted_times_max.append(formatted_time_max)  # Collect formatted time in the list
     starting_max += 1
+'''
+starting_max = 0
+formatted_times_max = []  # Initialize an empty list to collect formatted times
+
+for eachtime in highest_times:
+    eachtime = int(eachtime) - starttime_max[starting_max % len(starttime_max)]  # Use modulo to ensure index wraps around
+    formatted_time_max = datetime.fromtimestamp(eachtime).strftime('%H:%M:%S')
+    formatted_times_max.append(formatted_time_max)  # Collect formatted time in the list
+    starting_max += 1
+
+# Print or use formatted_times_max as needed
+#print(formatted_times_max)
 
 from datetime import datetime
 
@@ -313,6 +364,7 @@ for x in maxtimes:
     a = a+1
     if a == len(maxtimes):
         break
+'''
 # Print the collected formatted times
 def print_study_sessions_summary(formatted_times, date_words, locations, lowest_total_waste, mintimes):
    
@@ -354,27 +406,47 @@ for y in maxpercent:
     
 #print(totaltime)
 #print(wasteminutes)
-
+'''
 import matplotlib.pyplot as plt
 import numpy as np
 
 # data from https://allisonhorst.github.io/palmerpenguins/
+if whatif == 1:
+    study_space = location
+    amountoftime = {
+        "The amount of wasted time": wasteminutes,
+        "Total time spent studying": totaltime,
+    }
+    width = 0.5
 
-study_space = location
-amountoftime = {
-    "The amount of wasted time": wasteminutes,
-    "Total time spent studying": totaltime,
-}
-width = 0.5
+    fig, ax = plt.subplots()
+    bottom = np.zeros(len(location))
 
-fig, ax = plt.subplots()
-bottom = np.zeros(len(location))
+    for boolean, amountoftime in amountoftime.items():
+        p = ax.bar(study_space, amountoftime, width, label=boolean, bottom=bottom)
+        bottom += amountoftime
 
-for boolean, amountoftime in amountoftime.items():
-    p = ax.bar(study_space, amountoftime, width, label=boolean, bottom=bottom)
-    bottom += amountoftime
+    ax.set_title("The ratio of wasted time in regards to total time in minutes spent studying")
+    ax.legend(loc="upper right")
 
-ax.set_title("The ratio of wasted time in regards to total time in minutes spent studying")
-ax.legend(loc="upper right")
+    plt.show()
 
-plt.show()
+if whatif == 2:
+    plt.figure(figsize=(10, 6))
+    plt.bar(Location_interpret_max, maxtimes, color='skyblue')
+
+# Add a horizontal line for max_total_waste
+    plt.axhline(y=max_total_waste, color='red', linestyle='--', label=f'Max Total Waste: {max_total_waste}')
+
+# Add labels and title
+    plt.xlabel('Location')
+    plt.ylabel('Total Time Wasted (minutes)')
+    plt.title('Total Time Wasted per Study Session')
+
+# Add text annotation for each bar
+    for i, v in enumerate(maxtimes):
+        plt.text(i, v + 5, str(v), ha='center', va='bottom')
+
+    plt.legend()
+    plt.show()
+
