@@ -12,10 +12,13 @@ percentage = 0
 
 cred = credentials.Certificate("C:/Users/18DCummins.ACC/Downloads/lc-project-457ba-firebase-adminsdk-fwptw-0e086bdeef.json")
 firebase_admin.initialize_app(cred,{'databaseURL': 'https://lc-project-457ba-default-rtdb.europe-west1.firebasedatabase.app/'})
-#whatif = input('Enter 1 if you want to see your best sessions(What if #1) or enter 2 if you want to see your worst(What if #2). If you dont enter either of these you will be shown your best results: ')
-#if whatif != '1' and whatif !='2':
- #   whatif = 1
-#whatif = int(whatif)
+while True:
+    whatif = input('Enter 1 if you want to see your best sessions (What if #1) or enter 2 if you want to see your worst (What if #2). If you don\'t enter either of these you will be shown your best results: ')
+    if whatif in ['1', '2']:
+        break
+
+whatif = int(whatif)
+
 #ref.update({'study_time':''})
 
 custom_timestamps = [
@@ -281,11 +284,11 @@ for spots in highest_times:
 #print(maxtimes_spot)
 
 Location_interpret_max = []
-for spot in highest_times:
-    spot_value = float(spot)  # Convert timestamp to float
-    study_spot = data[spot]['Location']  # Fetch corresponding study time
+#for spot in highest_times:
+    #spot_value = float(spot)  # Convert timestamp to float
+    #study_spot = data[spot]['Location']  # Fetch corresponding study time
     #formatted_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(timestamp_value))  # Format timestamp
-    Location_interpret_max.append(study_spot)
+    #Location_interpret_max.append(study_spot)
     #print("At", timestamp, "the study time was", study_time, "minutes.")
 #
 #print(Location_interpret)
@@ -380,10 +383,13 @@ def date_to_words_2(lowest_times):
 
 date_words_2 = date_to_words_2(lowest_times)
 #print(date_words_2)
-def find_highest_percentage_values(times, totalwaste):
-    # Initialize variables to store the highest percentage and its corresponding values
+from datetime import datetime
+
+def find_highest_percentage_values(times, totalwaste, allmaxtimes):
+    # Initialize variables to store the highest percentage, its corresponding values, and corresponding times
     highest_percentage = 0
     highest_values = []
+    highest_times = []
     
     # Iterate through the lists
     for i in range(len(times)):
@@ -394,53 +400,48 @@ def find_highest_percentage_values(times, totalwaste):
         percentage = (totalwaste[i] / time_float) * 100
         
         # If the current percentage is higher than the highest percentage, update the highest percentage
-        # and reset the list of highest values
+        # and reset the lists of highest values and highest times
         if percentage > highest_percentage:
             highest_percentage = percentage
             highest_values = [(times[i], totalwaste[i])]
-        # If the current percentage is equal to the highest percentage, append the pair to the list
+            highest_times = [allmaxtimes[i]]
+        # If the current percentage is equal to the highest percentage, append the pair and time to the lists
         elif percentage == highest_percentage:
             highest_values.append((times[i], totalwaste[i]))
+            highest_times.append(allmaxtimes[i])
     
-    # Return the highest percentage and its corresponding values
-    return highest_percentage, highest_values
+    # Return the highest percentage, its corresponding values, and corresponding times
+    return highest_percentage, highest_values, highest_times
 
-highest_percentage, highest_values = find_highest_percentage_values(allmaxtimes, totalwaste)
-print("The highest percentage of waste is:", highest_percentage)
-print("The values corresponding to the highest percentage of waste are:", highest_values)
+highest_percentage, highest_values, highest_times = find_highest_percentage_values(allmaxtimes, totalwaste, times)
 
-
-def find_highest_percentage_time(times, totalwaste, highest_values):
-    # Initialize variables to store the highest percentage and its corresponding time
-    highest_percentage = 0
-    highest_time = None
+#print("The highest percentage of waste is:", highest_percentage)
+#print("The values corresponding to the highest percentage of waste are:", highest_values)
+def date_to_words_3(hightime):
+    date_words_3 = []
+    for timestamp in lowest_times:
+        # Convert timestamp to integer
+        timestamp_int = int(timestamp)
+        
+        # Convert timestamp to datetime object
+        date_object = datetime.fromtimestamp(timestamp_int)
     
-    # Iterate through the highest values
-    for value_pair in highest_values:
-        # Extract time and totalwaste from the value pair
-        time_value, totalwaste_value = value_pair
-        
-        # Find the index of the value pair in the original lists
-        index = totalwaste.index(totalwaste_value)
-        
-        # Get the corresponding time
-        time = times[index]
-        
-        # Calculate the percentage of waste for the current entry
-        percentage = (totalwaste_value / float(time)) * 100
-        
-        # Update the highest percentage and its corresponding time if applicable
-        if percentage > highest_percentage:
-            highest_percentage = percentage
-            highest_time = time
+        # Convert datetime object to words
+        date_word = date_object.strftime('%m/%d/%Y %H:%M')
+        date_words_3.append(date_word)
     
-    # Return the highest percentage and its corresponding time
-    return  highest_time
+    return date_words_3
 
-highest_time = find_highest_percentage_time(times, totalwaste, highest_values)
-highest_time = float(highest_time)
-highest_time_datetime = datetime.fromtimestamp(highest_time)
-print("The time corresponding to the highest percentage of waste is:", highest_time_datetime)
+date_words_3 = date_to_words_3(highest_times)
+
+#print("The times corresponding to the highest percentage of waste are:", date_words_3)
+for spot in highest_times:
+    spot_value = float(spot)  # Convert timestamp to float
+    study_spot = data[spot]['Location']  # Fetch corresponding study time
+    #formatted_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(timestamp_value))  # Format timestamp
+    Location_interpret_max.append(study_spot)
+    #print("At", timestamp, "the study time was", study_time, "minutes.")
+#print(Location_interpret_max)
 
 
 maxpercent = []
@@ -495,7 +496,7 @@ for y in maxpercent:
 '''    
 #print(totaltime)
 #print(wasteminutes)
-'''
+
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -521,21 +522,41 @@ if whatif == 1:
     plt.show()
 
 if whatif == 2:
-    plt.figure(figsize=(10, 6))
-    plt.bar(Location_interpret_max, maxtimes, color='skyblue')
+    
+# Plot the data
 
-# Add a horizontal line for max_total_waste
-    plt.axhline(y=max_total_waste, color='red', linestyle='--', label=f'Max Total Waste: {max_total_waste}')
+# Plot the data
+    fig, ax = plt.subplots()
 
-# Add labels and title
-    plt.xlabel('Location')
-    plt.ylabel('Total Time Wasted (minutes)')
-    plt.title('Total Time Wasted per Study Session')
+# Width of each bar
+    width = 0.35
 
-# Add text annotation for each bar
-    for i, v in enumerate(maxtimes):
-        plt.text(i, v + 5, str(v), ha='center', va='bottom')
+# Indices for each location
+    ind = np.arange(len(highest_values))
 
-    plt.legend()
+# Plot the bars
+    for i, (value_pair, time) in enumerate(zip(highest_values, date_words_3)):
+    # Plot the first value in blue
+        ax.bar(ind[i] - width/2, value_pair[0], width, color='blue', label='Total Minutes' if i == 0 else None)
+    # Plot the second value beside the first one in orange
+        ax.bar(ind[i] + width/2, value_pair[1], width, color='orange', label='Wasted Minutes' if i == 0 else None)
+
+# Set x-axis labels including room and time
+    x_labels = [f"{loc} ({time})" for loc, time in zip(Location_interpret_max, date_words_3)]
+    ax.set_xticks(ind)
+    ax.set_xticklabels(x_labels)
+
+# Labeling
+    plt.xlabel('Location (Time)')
+    plt.ylabel('Minutes')
+    plt.title('Wasted Time for Highest Percentage Sessions')
+
+# Display legend outside the plot area
+    plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+
+    plt.tight_layout()
     plt.show()
-'''
+
+
+
+
