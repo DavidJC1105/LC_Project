@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2024-03-13T15:04:48.830Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" etag="j9QzjdU8amwR3lQKFeVt" version="24.0.5" type="github">
+<mxfile host="app.diagrams.net" modified="2024-03-13T15:22:45.137Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" etag="KTnAEQU1g7uuPDI_Q0Os" version="24.0.5" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="2514" dy="918" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="4014" dy="1733" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -11,6 +11,9 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="PWgybjxWVGojU53wuNPH-100" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="PWgybjxWVGojU53wuNPH-80" target="PWgybjxWVGojU53wuNPH-99">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PWgybjxWVGojU53wuNPH-265" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="PWgybjxWVGojU53wuNPH-80" target="PWgybjxWVGojU53wuNPH-264">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="PWgybjxWVGojU53wuNPH-80" value="Firebase is referenced" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.database;whiteSpace=wrap;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
@@ -587,6 +590,9 @@
         </mxCell>
         <mxCell id="PWgybjxWVGojU53wuNPH-263" value="Graph is displayed to the user" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="520" y="3755" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PWgybjxWVGojU53wuNPH-264" value="All necessary imports are made" style="whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-40" y="175" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
