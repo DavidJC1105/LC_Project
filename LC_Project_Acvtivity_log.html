@@ -2,28 +2,91 @@
 <html>
 <head>
 <title>Leaving Cert Project</title>
-<style>
-  .block-caps {
-    text-transform: uppercase;
-    font-weight: bold;
-    text-decoration: underline;
-    text-align: center;
-    font-size: 50px;
-  }
-</style>
+<link rel="stylesheet" type="text/css" href="LCP_home.css">
 </head>
-<body background = "c:\Users\18DCummins.ACC\Downloads\LC_Project_Background.jpg">
+<body background = "c:\Users\David Cummins\Downloads\pexels-photo-1939485.jpeg">
 
 <div class="block-caps">Here you can see my activity log week by week</div>
 <h1>This is the activity log page</h1>
 
-<p><a href="LC_Project_HTML.html">Click here to return to my home page</a></p>
+<h2><a href="LC_Project_HTML.html">Click here to return to my home page</a></h2>
 
-<p><a href="LC_Project_investigation_and_plan.html">Here you can see my investigation</a></p>
+<h2><a href="LC_Project_investigation_and_plan.html">Here you can see my investigation</a></h2>
 
-<p><a href="LC_Project_Plan.html">Here you can see my planning process</a></p>
-<p><a href="LC_Project_design.html">Here you can see my designing process</a></p>
+<h2><a href="LC_Project_Plan.html">Here you can see my planning process</a></h2>
+<h2><a href="LC_Project_design.html">Here you can see my designing process</a></h2>
 
-
+<h1>Week 1</h1>
+<p>I spent this week investigating and thinking about what it is I wanted my project to be </p>
+<br>
+<h1>Week 2</h1>
+<p>This week I sorted my microbit make code. I got it to take in sound and if the sound level was surpassed it makes a beep at the end of the minute. I also had it so it was sending over radio to another microbit 
+    so that the info could be sent to Thonny </p>
+<img src="c:\Users\David Cummins\OneDrive\Pictures\Week 2 (3).png" alt="Week 2 image">
+<img src="c:\Users\David Cummins\OneDrive\Pictures\Week 2 (1).png" alt="Week 2 image">
+<br>
+<h1>Week 3</h1>
+<p>This week I got my microbit information sending to my firebase in the format I wanted it to be in</p>
+<img src="c:\Users\David Cummins\OneDrive\Pictures\Week 4.png" alt="Week 3 image">
+<br>
+<h1>Week 4</h1>
+<p>This week I got my dataset prepared and I got my code to validate the user input so that I wouldn't have to worry about it in the future. Finally, I added a feature to make my code check if the firebase child 
+    and dataset already existed and if it did then it ignore the code to create it. If not, it would run the code to create it </p>
+<img src="c:\Users\David Cummins\OneDrive\Pictures\Week 5 (2).png" alt="Week 4 image">
+<img src="c:\Users\David Cummins\OneDrive\Pictures\Week 5 (3).png" alt="Week 4 image">
+<br>
+<h1>Week 5</h1>
+<p>This week I began to interpret my dataset and the testing values I had logged from the microbit. Not much was done for final outputs but lists were made and prepared to make that process easier in the future. 
+    I also added a feature that shows all the data in the firebase in a presentable format </p>
+<img src="c:\Users\David Cummins\OneDrive\Pictures\Week 6.png" alt="Week 5 image">
+<br>
+<h1>Week 6</h1>
+<p>This week I got my what if functions up and running. All the relevant information for the final output to the user is almost ready to be used for graphing and outputs</p>
+<img src="c:\Users\David Cummins\OneDrive\Pictures\Week 7.png" alt="Week 6 image">
+<br>
+<h1>Week 7</h1>
+<p>This week I  got some code that converts my time.time() values into a standard date and time format. I also used the returned time values to find the locations that matched these times. I realised 
+    I would need the average values for a graph so all of these were found and sent to a list to be graphed later. </p>
+<img src="c:\Users\David Cummins\OneDrive\Pictures\Week 8 (1).png" alt="Week 7 image">
+<img src="c:\Users\David Cummins\OneDrive\Pictures\Week 8 (2).png" alt="Week 7 image">
+<img src="c:\Users\David Cummins\OneDrive\Pictures\Week 8 (3).png" alt="Week 7 image">
+<br>
+<h1>Week 8</h1>
+<p>After some difficulty trying to separate the pairs of values I resorted to code I knew worked and just used the times that had been returned from my function and matched them to the firebase and took the 
+    info I needed from under each time. I also set up functions to print whatever output the user requested at the beginning</p>
+<img src="c:\Users\David Cummins\OneDrive\Pictures\Week 10.png" alt="Week 8 image">
+<br>
+<h1>Week 9</h1>
+<p>I spent this week doing my graphs and making sure all the data was being displayed how I wanted it</p>
+<img src="c:\Users\David Cummins\OneDrive\Pictures\Week 11.png" alt="Week 9 image">
+<br>
+<h1>Week 10</h1>
+<p>This week I began to form the html pages. After some time away from html coding it was a slow progress week</p>
+<img src="c:\Users\David Cummins\OneDrive\Pictures\Week 10 new.png" alt="Week 10 image">
+<br>
+<h1>Week 11</h1>
+<p>This week I completed my html pages and have all the relevant links to each webpage done and formatted </p>
+<img src="c:\Users\David Cummins\OneDrive\Pictures\Week 1.png" alt="Week 11 image">
+<br>
+<h1>Week 12</h1>
+<p>I spent this week writing my script, filming my video and doing the voice over in order to fully complete this project </p>
+<img src="c:\Users\David Cummins\OneDrive\Pictures\Week 1.png" alt="Week 12 image">
+<br>
+<h1 class=".block-caps_2">Important Piece of Code</h1>
+<p>This code is crucial to my second what if question. I had previously figured out my percentage issue which meant that creating this code was not as difficult as I had anticipated. With this code working it 
+    meant that I could display these values to the user and also send them to my graphing code so it could be shown to the user visually. As you can see all the times that study took place, all the wasted minutes 
+    in each session and the overall study time per session. This function find the pair of waste and total minutes that give the lowest percentage and it is then matched with the time these values came from. 
+    This works as when all these items were added to their respective lists they were done chronologically. This meant that I could use indexing to match these values  </p>
+<img src="c:\Users\David Cummins\OneDrive\Pictures\Week 1.png" alt="Week 12 image">
+<br>
+<h1 class=".block-caps_2">Issue I Faced</h1>
+<p>When I was using this function I was having an issue that it was giving the percentage as a long decimal. I was struggling to find out a way that I could get it to two decimal places and erasing and numbers 
+    after that. After some searching of the internet I found a piece of code that can be seen straight after the function that formats the percentage to two decimal places. This meant that value was ready to be 
+    shown to the user </p>
+<img src="c:\Users\David Cummins\OneDrive\Pictures\Week 1.png" alt="Week 12 image">
+<br>
+<h1 class=".block-caps_2">Unit Testing</h1>
+<p>I spent this week writing my script, filming my video and doing the voice over in order to fully complete this project </p>
+<img src="c:\Users\David Cummins\OneDrive\Pictures\Week 1.png" alt="Week 12 image">
 </body>
 </html>

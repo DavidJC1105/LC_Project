@@ -1,0 +1,103 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.block-caps {
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: underline;
+    text-align: center;
+    font-size: 50px;
+    color: black; /* Text color */
+    margin-top: 50px; /* Adjust as needed */
+}
+
+.block-caps_2 {
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: underline;
+    text-align: center;
+    font-size: 40px;
+    color: black; /* Text color */
+    margin-top: 30px; /* Adjust as needed */
+}
+
+p {
+    text-align: center;
+    color: black; /* Text color */
+    margin-top: 20px; /* Adjust as needed */
+    line-height: 1.5; /* Adjust line height */
+    font-size: 30px; /* Adjust text size */
+}
+h4 {
+    text-align: center;
+    text-decoration: underline;
+    color: black; /* Text color */
+    margin-top: 20px; /* Adjust as needed */
+    line-height: 1.5; /* Adjust line height */
+    font-size: 30px; /* Adjust text size */
+}
+h1 {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: underline;
+    color: black; /* Text color */
+    margin-top: 20px; /* Adjust as needed */
+    line-height: 1.5; /* Adjust line height */
+    font-size: 40px; /* Adjust text size */ 
+}
+h2{
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: underline;
+    color: blue; /* Text color */
+    margin-top: 10px; /* Adjust as needed */
+    line-height: 1.5; /* Adjust line height */
+    font-size: 15px; /* Adjust text size */  
+}
+
+a {
+    color: black; /* Link color */
+}
+
+a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+img {
+    display: block;
+    margin: auto;
+    border: 2px solid #333; /* Soft black border */
+    border-radius: 5px; /* Optional: Adds rounded corners */
+}
+li {
+    text-align: center;
+    color: black; /* Text color */
+    margin-top: 20px; /* Adjust as needed */
+    line-height: 1.5; /* Adjust line height */
+    font-size: 24px; /* Adjust text size */
+}
+
+/* Ordered list */
+ol {
+    text-align: center;
+    color: black; /* Text color */
+    margin-top: 20px; /* Adjust as needed */
+    line-height: 1.5; /* Adjust line height */
+    font-size: 24px; /* Adjust text size */
+}
+ul {
+    list-style-type: disc; /* Change to 'circle' or 'square' for different bullet styles */
+    text-align: center;
+    color: black; /* Text color */
+    margin-top: 20px; /* Adjust as needed */
+    line-height: 1.5; /* Adjust line height */
+    font-size: 18px; /* Adjust text size */
+}
+
