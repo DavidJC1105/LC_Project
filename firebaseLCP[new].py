@@ -26,7 +26,7 @@ while True:
     if mb_one:
         number = mb_one
         number1 = number[0]
-        numb = int(number1)
+        numb = int(number1)#valides that numb is an integer
         if numb==0:
             waste = waste + 1
             percent = (waste/counter)*100
@@ -41,6 +41,11 @@ while True:
             percentage = float(yas)
         print("You have been studying for ",counter," minute(s) and you have wasted ",waste," of those minute(s)",counter,',',waste)
         numb = str(numb)
+        if not counter.isdigit():
+            print('Invalid data')
+        else:
+            counter = int(counter)#This validates that counter is an integer
+            waste = int(waste)#This validates that waste is an integer
         if numb == '2':
             ref.update({str(int(time.time())):{'study_time(minutes)':counter, 'Location':source, 'Wasted_Time(minutes)':waste}})
             break
