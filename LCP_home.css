@@ -100,4 +100,8 @@ ul {
     line-height: 1.5; /* Adjust line height */
     font-size: 18px; /* Adjust text size */
 }
-
+video {
+    display: block;
+    margin: 0 auto; /* Center the video horizontally */
+    border: 2px solid black; /* Black border around the video */
+}
